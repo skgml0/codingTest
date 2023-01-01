@@ -1,0 +1,20 @@
+// 숫자로 이루어진 문자열 t,p 
+// p의 길이만큼 t를 처음부터 잘라서, 배열에 넣고, p랑 비교해서 작거나 같은 개수
+
+function solution(t, p) {
+    let arr = [];
+    let answer = [];
+    const originLength = t.length
+    const cutLength = p.length;
+    const lastIndexPlus1 = originLength - cutLength +1
+    for (i=0; i<lastIndexPlus1; i++){
+        arr.push(t.slice(i,cutLength+i));
+    }
+    console.log(arr)
+    for(k=0; k<arr.length; k++){
+       if(arr[k]<=p){
+           answer.push(arr[k])
+       } 
+    }
+    return answer.length;
+}
