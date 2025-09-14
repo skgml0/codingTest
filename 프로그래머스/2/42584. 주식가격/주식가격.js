@@ -1,15 +1,21 @@
 function solution(prices) {
-    const answer =[]
-    prices.forEach((currentPrice,i)=> {
-        let notFallTime = 1;
-        for(let index =i+1; index<prices.length; index++){
-           if(index===prices.length-1){return answer.push(notFallTime)}
-           if(currentPrice <= prices[index]){
-              notFallTime++
-           }
-           else{return answer.push(notFallTime)}
-        }
-    })
-    answer.push(0)
-    return answer;
+  const answer = new Array(prices.length).fill(0);
+  const stack = [];
+  let length = prices.length;
+
+  for(let i = 0; i < length; i++) {
+    while(stack.length && prices[i] < prices[stack[stack.length - 1]]) {
+      let temp = stack.pop();
+      answer[temp] = i - temp;
+    }
+    stack.push(i);
+    console.log(stack,'stack')
+  }
+
+  while(stack.length) {
+    let temp = stack.pop();
+    answer[temp] = length - temp - 1;
+  }
+
+  return answer;
 }
